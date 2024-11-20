@@ -89,10 +89,11 @@ ol {
 
 /* #region Link */
 
-.nav {
+.header-nav {
     display: flex;
     align-items: center;
 }
+
 
 .nav-link {
     font-weight: 500;
@@ -103,26 +104,24 @@ ol {
     padding: 24px 0;
     display: block;
     position: relative;
-    color: var(--highlight-color);
     transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.nav-link::after {
-    content: '';
-    position: absolute;
-    bottom: -1px;
-    left: 0;
-    width: 100%;
-    height: 4px;
-    background-color: var(--highlight-color);
-    border-radius: 2px;
-    opacity: 0;
-    transition: opacity 250ms cubic-bezier(0.4, 0, 0.2, 1);
+.nav-link.current {
+    position: relative;
 }
 
-.nav-link:hover::after {
-    opacity: 1;
+.nav-link.current::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -1px;
+    width: 100%;
+    height: 4px;
+    background-color: #404bbf;
+    
 }
+
 
 .nav-list {
     display: flex;
@@ -135,16 +134,18 @@ nav ul {
     list-style: none;
 }
 
+.contact-info {
+    font-style: normal;
+    margin-left: auto;
+}
+
 .contact-list {
     display: flex;
     align-items: center;
     gap: 40px;
 }
 
-.contact-info {
-    font-style: normal;
-    margin-left: auto;
-}
+
 
 .contact-link {
     display: block;
@@ -153,14 +154,20 @@ nav ul {
     line-height: 1.5;
     letter-spacing: 0.02em;
     color: #434455;
+    
 }
 
 .contact-link {
     transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.contact-link:hover {
-    color: var(--highlight-color);
+.contact-link:hover,
+.contact-link:focus,
+.nav-link:hover,
+.nav-link:focus,
+.nav-link.current {
+    color: #404bbf;
+    
 }
 
 /* #endregion */
@@ -434,7 +441,7 @@ nav ul {
 
 .team_member_socials-list {
     display: flex;
-    gap: 8px;
+    gap: 24px;
     padding: 0;
     margin: 0;
     list-style: none;
@@ -451,12 +458,11 @@ nav ul {
 }
 
 .team_member_socials-link {
-    text-decoration: none;
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 32px;
-    height: 32px;
+    width: 100%;
+    height: 100%;
     border-width: 2px;
     border-radius: 50%;
     background-color: #4D5AE5;
@@ -464,12 +470,20 @@ nav ul {
 }
 
 .team_member_socials-icon {
+    width: 16px;
+    height: 16px;
     fill: #f4f4fd;
     transition: fill 0.3s ease;
 }
 
-.team_member_socials-link:hover .team_member_socials-icon {
-    fill: #555;
+.team_member_socials-link:hover, 
+.team_member_socials-link:focus {
+    background-color: #404bbf;
+}
+
+.team_member_socials-link:hover .team_member_socials-icon, 
+.team_member_socials-link:focus .team_member_socials-icon {
+    fill: #f4f4fd;
 }
 
 .team_member_role {
@@ -495,6 +509,13 @@ nav ul {
     margin-bottom: 8px;
 }
 
+.portfolio__project-description {
+    font-size: 16px;
+    line-height: 1.5;
+    letter-spacing: 0.02em;
+    color: #434455;
+  }
+
 .portfolio {
     background-color: #ffffff;
     padding: 120px 0 120px 0;
@@ -515,7 +536,9 @@ nav ul {
     flex-wrap: wrap;
     column-gap: 24px;
     row-gap: 48px;
+
 }
+
 
 .portfolio__project-description {
     font-size: 16px;
@@ -525,13 +548,78 @@ nav ul {
 }
 
 .portfolio__project {
-    flex-basis: calc((100% - 48px) / 3);
-
+    position: relative;
+    overflow: hidden;
+    transition: box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1);
+    
 }
+
+.portfolio__project:hover .project-info {
+    box-shadow: 
+        0px 1px 6px rgba(46, 47, 66, 0.08),
+        0px 1px 1px rgba(46, 47, 66, 0.16),
+        0px 2px 1px rgba(46, 47, 66, 0.08);   
+        transform: translateY(0%);
+}
+
+.banking {
+    position: relative;
+    overflow: hidden; 
+}
+
+.banking::after {
+    position: absolute;
+    top: 0;
+    font-size: 16px;
+    line-height: 1.5;
+    letter-spacing: 0.02em;
+    color: #f4f4fd;
+    background-color: #4d5ae5;
+    padding: 40px 32px;
+    height: 100%;
+    width: 100%;
+    transform: translateY(100%);
+    transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.portfolio__project:hover .portfolio-overlay {
+    transform: translateY(0);
+  }
+
+  .project-info {
+    padding: 32px 16px;
+    border: 1px solid #e7e9fc;
+    border-top: none;
+    background: #ffffff;
+  }
+
+
 
 .portfolio__project img {
     display: block;
+    width: 100%;
+    height: auto;
 }
+
+.portfolio-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #4d5ae5;
+    color: #f4f4fd;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-size: 16px;
+    line-height: 1.5;
+    letter-spacing: 0.02em;
+    padding: 40px 32px;
+    transform: translateY(100%);
+    transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
 
 .project-info {
     padding: 32px 16px;
